@@ -1,0 +1,19 @@
+
+name: First Workflow
+
+on:
+  - push
+
+jobs: 
+    first_job: 
+        name: Number 1    
+        runs-on: ubuntu-latest
+        steps:
+            - name: Welcome Message
+              run: echo "My first GitHu Actions Job"
+
+            - name: List Files 
+              run: ls -1a
+
+            - name: show present working directory
+              run: pwd
