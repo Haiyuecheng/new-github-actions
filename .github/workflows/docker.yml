@@ -28,4 +28,8 @@ jobs:
       - name: Docker Login
         run: docker login --username=bronzy622 --password=!C#V)BaBx5iag/?
       - name: Docker Run
+<<<<<<< HEAD
         run: docker run -d -p 8080:80 docker.io/bronzy622/new-app:latest
+=======
+        run: docker run -d -p 8080:80 docker.io/bronzy622/new-app:latest
+>>>>>>> 1922ab84f134f6aa9158a0930c97befc124ca004
