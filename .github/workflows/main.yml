@@ -15,10 +15,10 @@ jobs:
         os: [ubuntu-latest, ubuntu-20.04, windows-latest]
         image: [hello-world,node,python, alpine]
         exclude: 
-          - images: alpine
+          - image: alpine
             os: windows-latest
         include: 
-          - images: amd64/alpine
+          - image: amd64/alpine
             os: ubuntu-20.04
     runs-on: ${{ matrix.os }}
     env:
