@@ -9,6 +9,8 @@ on:
 jobs:
   deploy:
     strategy:
+      fail-fast: false # when a job fails, it will not affect successive jobs running in parallel.
+      max-parallel: 3
       matrix:
         os: [ubuntu-latest, ubuntu-20.04, windows-latest]
         image: [hello-world,nginx,node,python, alpine]
