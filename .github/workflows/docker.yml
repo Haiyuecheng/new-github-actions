@@ -4,11 +4,14 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:   
+  workflow_dispatch:
 
 jobs: 
   docker_build: 
     runs-on: ubuntu-latest
+    env:
+      CONTAINER_REGISTRY: docker.io
+      IMAGE_NAME: new-app
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -23,17 +26,20 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker Build
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/sandbox2-app:latest .
+        run: docker build -t ${{ env.CONTAINER_REGISTRY }}/${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest .
 
       - name: Docker Publish
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/sandbox2-app:latest
+        run: docker push ${{ env.CONTAINER_REGISTRY }}/${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest
 
   docker_deploy:
-    needs: docker_build 
+    needs: docker_build
     concurrency: 
       group: production-deployment
       cancel-in-progress: true
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
+    env:
+      CONTAINER_REGISTRY: docker.io
+      IMAGE_NAME: sandbox-app
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -46,5 +52,5 @@ jobs:
 
       - name: Docker Run
         run: |
-          docker run -d -p 8080:80 ${{ env.CONTAINER_REGISTRY }}/${{ vars.DOCKER_USERNAME }}/sandbox2-app:latest
+          docker run -d -p 8080:80 ${{ env.CONTAINER_REGISTRY }}/${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest
           sleep 300s
