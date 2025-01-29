@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CONTAINER_REGISTRY: docker.io
-      IMAGE_NAME: new-app
+      IMAGE_NAME: sandbox2-app
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
