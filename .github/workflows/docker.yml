@@ -2,16 +2,11 @@ name: Docker Workflow
 
 on:
   schedule: 
-    - cron: "* * * * *"
+    - cron: "*/5 * * * *"  # Runs every 5 minutes
   workflow_dispatch:
 
-
-env:
-  CONTAINER_REGISTRY: docker.io
-  IMAGE_NAME: my_resume-app
-
-jobs:
-  docker_build:
+jobs: 
+  docker_build: 
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -27,10 +22,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker Build
-        run: docker build -t ${{ env.CONTAINER_REGISTRY }}/${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest .
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/new-app:latest .
 
       - name: Docker Publish
-        run: docker push ${{ env.CONTAINER_REGISTRY }}/${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/new-app:latest
 
   docker_deploy:
     needs: docker_build
@@ -46,4 +41,4 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker Run
-        run: docker run -d -p 8080:80 ${{ env.CONTAINER_REGISTRY }}/${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest
+        run: docker run -d -p 8080:80 ${{ secrets.DOCKER_USERNAME }}/new-app:latest
