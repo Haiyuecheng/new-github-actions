@@ -10,15 +10,16 @@ jobs:
   deploy:
     strategy:
       fail-fast: false # when a job fails, it will not affect successive jobs running in parallel.
-      max-parallel: 3
+      max-parallel: 5
       matrix:
         os: [ubuntu-latest, ubuntu-20.04, windows-latest]
-        image: [hello-world,nginx,node,python, alpine]
-        exclude:
-          - os: windows-latest
-            image: alpine
-          - os: ubuntu-20.04
-            image: alpine
+        image: [hello-world,node,python, alpine]
+        exclude: 
+          - images: alpine
+            os: windows-latest
+        include: 
+          - images: amd64/alpine
+            os: ubuntu-20.04
     runs-on: ${{ matrix.os }}
     env:
       ENVIRONMENT: staging
