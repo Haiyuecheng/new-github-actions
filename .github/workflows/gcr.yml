@@ -31,7 +31,7 @@ jobs:
         run: docker push ${{ env.CONTAINER_REGISTRY }}/${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest
 
       - name: GHCR Login
-        run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io --username "${{ github.actor }}" --password-stdin
+        run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io --username "${{ env.REPOSITORY_OWNER }}" --password-stdin
 
       - name: Publish code to GHCR
         run: |
