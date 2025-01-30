@@ -7,18 +7,18 @@ on:
 
 jobs:
   deploy_dev:
-    uses: re-usable.yml
+    uses: ./.github/workflows/re-usable.yml
     with:
       environment: dev
 
   deploy_staging:
     needs: deploy_dev
-    uses: re-usable.yml
+    uses: ./.github/workflows/re-usable.yml
     with:
       environment: staging
 
   deploy_prod:
     needs: deploy_staging
-    uses: re-usable.yml
+    uses: ./.github/workflows/re-usable.yml
     with:
       environment: production

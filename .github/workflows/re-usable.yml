@@ -1,4 +1,4 @@
-name: Deploy Workflow
+name: Reusable Workflow
 
 on:
   workflow_call:
@@ -6,16 +6,13 @@ on:
       environment:
         required: true
         type: string
-        default: 'production'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check Out Code
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Deploy Application
-        run: |
-          echo "Deploying to ${{ inputs.environment }} environment"
+      - name: Deploy to ${{ inputs.environment }}
+        run: echo "Deploying to ${{ inputs.environment }} environment"
