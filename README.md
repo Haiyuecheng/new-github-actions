@@ -1,132 +1,265 @@
-Agar.io Clone
-=============
+[![Express Logo](https://i.cloudup.com/zfY6lL7eFa-3000x3000.png)](https://expressjs.com/)
 
-This project was originally created by @huytd. I have since taken ownership of the repository to revive the project.
+**Fast, unopinionated, minimalist web framework for [Node.js](https://nodejs.org).**
 
-[![GitHub Stars](https://img.shields.io/github/stars/huytd/agar.io-clone.svg)](https://github.com/huytd/agar.io-clone/stargazers)
-[![GitHub Issues](https://img.shields.io/github/issues/huytd/agar.io-clone.svg)](https://github.com/huytd/agar.io-clone/issues)
-[![GitHub Wiki](https://img.shields.io/badge/project-wiki-ff69b4.svg)](https://github.com/huytd/agar.io-clone/wiki/Home)
-[![Live Demo](https://img.shields.io/badge/demo-online-green.svg)](#live-demos)
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/huytd/agar.io-clone?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+**This project has a [Code of Conduct][].**
 
-A simple but powerful Agar.IO clone built with socket.IO and HTML5 canvas on top of NodeJS.
+## Table of contents
 
-![Image](screenshot.png)
+* [Installation](#Installation)
+* [Features](#Features)
+* [Docs & Community](#docs--community)
+* [Quick Start](#Quick-Start)
+* [Running Tests](#Running-Tests)
+* [Philosophy](#Philosophy)
+* [Examples](#Examples)
+* [Contributing to Express](#Contributing)
+* [TC (Technical Committee)](#tc-technical-committee)
+* [Triagers](#triagers)
+* [License](#license)
 
-## Live Demos
-An updated live list of demos can be found on the [Live Demos wiki page](https://github.com/owenashurst/agar.io-clone/wiki/Live-Demos).
 
-The official Agar.IO-Clone URL can be found [here](https://owenashurst-agario-clone.herokuapp.com).
+[![NPM Version][npm-version-image]][npm-url]
+[![NPM Install Size][npm-install-size-image]][npm-install-size-url]
+[![NPM Downloads][npm-downloads-image]][npm-downloads-url]
+[![OpenSSF Scorecard Badge][ossf-scorecard-badge]][ossf-scorecard-visualizer]
 
-This is the most up to date version from master. Any merged pull requests will deploy to this URL automatically.
 
----
+```js
+import express from 'express'
 
-## How to Play
-You can check out how to play on our [wiki](https://github.com/owenashurst/agar.io-clone/wiki/How-to-Play).
+const app = express()
 
-#### Game Basics
-- Move your mouse around the screen to move your cell.
-- Eat food and other players in order to grow your character (food respawns every time a player eats it).
-- A player's **mass** is the number of food particles eaten.
-- **Objective**: Try to get as big as possible and eat other players.
+app.get('/', (req, res) => {
+  res.send('Hello World')
+})
 
-#### Gameplay Rules
-- Players who haven't eaten yet cannot be eaten as a sort of "grace" period. This invincibility fades once they gain mass.
-- Everytime a player joins the game, **3** food particles will spawn.
-- Everytime a food particle is eaten by a player, **1** new food particle will respawn.
-- The more food you eat, the slower you move to make the game fairer for all.
-
----
-
-## Latest Changes
-- Game logic is handled by the server
-- The client side is for rendering of the canvas and its items only.
-- Mobile optimisation.
-- Implementation of working viruses.
-- Display player name.
-- Now supporting chat. 
-- Type`-ping` in the chatbox to check your ping, as well as other commands!
-
----
+app.listen(3000)
+```
 
 ## Installation
-You can simply click one of the buttons below to easily deploy this repo to Bluemix or Heroku:
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+This is a [Node.js](https://nodejs.org/en/) module available through the
+[npm registry](https://www.npmjs.com/).
 
-Or...
+Before installing, [download and install Node.js](https://nodejs.org/en/download/).
+Node.js 18 or higher is required.
 
->You can check out a more detailed setup tutorial on our [wiki](https://github.com/owenashurst/agar.io-clone/wiki/Setup).
+If this is a brand new project, make sure to create a `package.json` first with
+the [`npm init` command](https://docs.npmjs.com/creating-a-package-json-file).
 
-#### Requirements
-To run / install this game, you'll need: 
-- NodeJS with NPM installed.
-- socket.IO.
-- Express.
+Installation is done using the
+[`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-
-#### Downloading the dependencies
-After cloning the source code from Github, you need to run the following command to download all the dependencies (socket.IO, express, etc.):
-
+```bash
+npm install express
 ```
+
+Follow [our installing guide](https://expressjs.com/en/starter/installing.html)
+for more information.
+
+## Features
+
+  * Robust routing
+  * Focus on high performance
+  * Super-high test coverage
+  * HTTP helpers (redirection, caching, etc)
+  * View system supporting 14+ template engines
+  * Content negotiation
+  * Executable for generating applications quickly
+
+## Docs & Community
+
+  * [Website and Documentation](https://expressjs.com/) - [[website repo](https://github.com/expressjs/expressjs.com)]
+  * [GitHub Organization](https://github.com/expressjs) for Official Middleware & Modules
+  * [Github Discussions](https://github.com/expressjs/discussions) for discussion on the development and usage of Express
+
+**PROTIP** Be sure to read the [migration guide to v5](https://expressjs.com/en/guide/migrating-5)
+
+## Quick Start
+
+  The quickest way to get started with express is to utilize the executable [`express(1)`](https://github.com/expressjs/generator) to generate an application as shown below:
+
+  Install the executable. The executable's major version will match Express's:
+
+```bash
+npm install -g express-generator@4
+```
+
+  Create the app:
+
+```bash
+express /tmp/foo && cd /tmp/foo
+```
+
+  Install dependencies:
+
+```bash
 npm install
 ```
 
-#### Running the Server
-After downloading all the dependencies, you can run the server with the following command:
+  Start the server:
 
-```
+```bash
 npm start
 ```
 
-The game will then be accessible at `http://localhost:3000`. The default port is `3000`, however this can be changed in config. Further elaboration is available on our [wiki](https://github.com/owenashurst/agar.io-clone/wiki/Setup).
+  View the website at: http://localhost:3000
 
+## Philosophy
 
-### Running the Server with Docker
-If you have [Docker](https://www.docker.com/) installed, after cloning the repository you can run the following commands to start the server and make it acessible at `http://localhost:3000`:
+  The Express philosophy is to provide small, robust tooling for HTTP servers, making
+  it a great solution for single page applications, websites, hybrids, or public
+  HTTP APIs.
 
+  Express does not force you to use any specific ORM or template engine. With support for over
+  14 template engines via [@ladjs/consolidate](https://github.com/ladjs/consolidate),
+  you can quickly craft your perfect framework.
+
+## Examples
+
+  To view the examples, clone the Express repository:
+
+```bash
+git clone https://github.com/expressjs/express.git --depth 1 && cd express
 ```
-docker build -t agarioclone_agar .
-docker run -it -p 3000:3000 agarioclone_agar
+
+  Then install the dependencies:
+
+```bash
+npm install
 ```
 
----
+  Then run whichever example you want:
 
-## FAQ
-1. **What is this game?**
+```bash
+node examples/content-negotiation
+```
 
-  This is a clone of the game [Agar.IO](http://agar.io/). Someone said that Agar.IO is a clone of an iPad game called Osmos, but we haven't tried it yet. (Cloneception? :P)
-  
-2. **Why would you make a clone of this game?**
+## Contributing
 
-  Well, while the original game is still online, it is closed-source, and sometimes, it suffers from massive lag. That's why we want to make an open source version of it: for educational purposes, and to let the community add the features that they want, self-host it on their own servers, have fun with friends and more.
-  
-3. **Any plans on adding an online server to compete with Agar.IO or making money out of it?**
+  [![Linux Build][github-actions-ci-image]][github-actions-ci-url]
+  [![Test Coverage][coveralls-image]][coveralls-url]
 
-  No. This game belongs to the open-source community, and we have no plans on making money out of it nor competing with anything. But you can of course create your own public server, let us know if you do so and we can add it to our Live Demos list!
-  
-4. **Can I deploy this game to my own server?**
+The Express.js project welcomes all constructive contributions. Contributions take many forms,
+from code for bug fixes and enhancements, to additions and fixes to documentation, additional
+tests, triaging incoming pull requests and issues, and more!
 
-  Sure you can! That's what it's made for! ;)
-  
-5. **I don't like HTML5 canvas. Can I write my own game client with this server?**
+See the [Contributing Guide](Contributing.md) for more technical details on contributing.
 
-  Of course! As long as your client supports WebSockets, you can write your game client in any language/technology, even with Unity3D if you want (there is an open source library for Unity to communicate with WebSockets)!
-  
-6. **Can I use some code of this project on my own?**
+### Security Issues
 
-  Yes you can.
+If you discover a security vulnerability in Express, please see [Security Policies and Procedures](Security.md).
 
-## For Developers
- - [Game Architecture](https://github.com/owenashurst/agar.io-clone/wiki/Game-Architecture) to understand how the backend works.
- - If you want to start your own project, I recommend you use [this template](https://github.com/huytd/node-online-game-template). Happy developing!
- -
+### Running Tests
 
-## TODOs
- We have an explicit [TODO](https://github.com/owenashurst/agar.io-clone/wiki/Coming-Features) list for the all the features we aim to develop in the future. Feel free to contribute, we'll be more than grateful.
+To run the test suite, first install the dependencies:
+
+```bash
+npm install
+```
+
+Then run `npm test`:
+
+```bash
+npm test
+```
+
+## People
+
+The original author of Express is [TJ Holowaychuk](https://github.com/tj)
+
+[List of all contributors](https://github.com/expressjs/express/graphs/contributors)
+
+### TC (Technical Committee)
+
+* [UlisesGascon](https://github.com/UlisesGascon) - **Ulises Gascón** (he/him)
+* [jonchurch](https://github.com/jonchurch) - **Jon Church**
+* [wesleytodd](https://github.com/wesleytodd) - **Wes Todd**
+* [LinusU](https://github.com/LinusU) - **Linus Unnebäck**
+* [blakeembrey](https://github.com/blakeembrey) - **Blake Embrey**
+* [sheplu](https://github.com/sheplu) - **Jean Burellier**
+* [crandmck](https://github.com/crandmck) - **Rand McKinney**
+* [ctcpip](https://github.com/ctcpip) - **Chris de Almeida**
+
+<details>
+<summary>TC emeriti members</summary>
+
+#### TC emeriti members
+
+  * [dougwilson](https://github.com/dougwilson) - **Douglas Wilson**
+  * [hacksparrow](https://github.com/hacksparrow) - **Hage Yaapa**
+  * [jonathanong](https://github.com/jonathanong) - **jongleberry**
+  * [niftylettuce](https://github.com/niftylettuce) - **niftylettuce**
+  * [troygoode](https://github.com/troygoode) - **Troy Goode**
+</details>
+
+
+### Triagers
+
+* [aravindvnair99](https://github.com/aravindvnair99) - **Aravind Nair**
+* [bjohansebas](https://github.com/bjohansebas) - **Sebastian Beltran**
+* [carpasse](https://github.com/carpasse) - **Carlos Serrano**
+* [CBID2](https://github.com/CBID2) - **Christine Belzie**
+* [enyoghasim](https://github.com/enyoghasim) - **David Enyoghasim**
+* [UlisesGascon](https://github.com/UlisesGascon) - **Ulises Gascón** (he/him)
+* [mertcanaltin](https://github.com/mertcanaltin) - **Mert Can Altin**
+* [0ss](https://github.com/0ss) - **Salah**
+* [import-brain](https://github.com/import-brain) - **Eric Cheng** (he/him)
+* [3imed-jaberi](https://github.com/3imed-jaberi) - **Imed Jaberi**
+* [dakshkhetan](https://github.com/dakshkhetan) - **Daksh Khetan** (he/him)
+* [lucasraziel](https://github.com/lucasraziel) - **Lucas Soares Do Rego**
+* [IamLizu](https://github.com/IamLizu) - **S M Mahmudul Hasan** (he/him)
+* [Sushmeet](https://github.com/Sushmeet) - **Sushmeet Sunger**
+
+<details>
+<summary>Triagers emeriti members</summary>
+
+#### Emeritus Triagers
+
+  * [AuggieH](https://github.com/AuggieH) - **Auggie Hudak**
+  * [G-Rath](https://github.com/G-Rath) - **Gareth Jones**
+  * [MohammadXroid](https://github.com/MohammadXroid) - **Mohammad Ayashi**
+  * [NawafSwe](https://github.com/NawafSwe) - **Nawaf Alsharqi**
+  * [NotMoni](https://github.com/NotMoni) - **Moni**
+  * [VigneshMurugan](https://github.com/VigneshMurugan) - **Vignesh Murugan**
+  * [davidmashe](https://github.com/davidmashe) - **David Ashe**
+  * [digitaIfabric](https://github.com/digitaIfabric) - **David**
+  * [e-l-i-s-e](https://github.com/e-l-i-s-e) - **Elise Bonner**
+  * [fed135](https://github.com/fed135) - **Frederic Charette**
+  * [firmanJS](https://github.com/firmanJS) - **Firman Abdul Hakim**
+  * [getspooky](https://github.com/getspooky) - **Yasser Ameur**
+  * [ghinks](https://github.com/ghinks) - **Glenn**
+  * [ghousemohamed](https://github.com/ghousemohamed) - **Ghouse Mohamed**
+  * [gireeshpunathil](https://github.com/gireeshpunathil) - **Gireesh Punathil**
+  * [jake32321](https://github.com/jake32321) - **Jake Reed**
+  * [jonchurch](https://github.com/jonchurch) - **Jon Church**
+  * [lekanikotun](https://github.com/lekanikotun) - **Troy Goode**
+  * [marsonya](https://github.com/marsonya) - **Lekan Ikotun**
+  * [mastermatt](https://github.com/mastermatt) - **Matt R. Wilson**
+  * [maxakuru](https://github.com/maxakuru) - **Max Edell**
+  * [mlrawlings](https://github.com/mlrawlings) - **Michael Rawlings**
+  * [rodion-arr](https://github.com/rodion-arr) - **Rodion Abdurakhimov**
+  * [sheplu](https://github.com/sheplu) - **Jean Burellier**
+  * [tarunyadav1](https://github.com/tarunyadav1) - **Tarun yadav**
+  * [tunniclm](https://github.com/tunniclm) - **Mike Tunnicliffe**
+</details>
+
 
 ## License
->You can check out the full license [here](https://github.com/owenashurst/agar.io-clone/blob/master/LICENSE).
 
-This project is licensed under the terms of the **MIT** license.
+  [MIT](LICENSE)
+
+[coveralls-image]: https://badgen.net/coveralls/c/github/expressjs/express/master
+[coveralls-url]: https://coveralls.io/r/expressjs/express?branch=master
+[github-actions-ci-image]: https://badgen.net/github/checks/expressjs/express/master?label=CI
+[github-actions-ci-url]: https://github.com/expressjs/express/actions/workflows/ci.yml
+[npm-downloads-image]: https://badgen.net/npm/dm/express
+[npm-downloads-url]: https://npmcharts.com/compare/express?minimal=true
+[npm-install-size-image]: https://badgen.net/packagephobia/install/express
+[npm-install-size-url]: https://packagephobia.com/result?p=express
+[npm-url]: https://npmjs.org/package/express
+[npm-version-image]: https://badgen.net/npm/v/express
+[ossf-scorecard-badge]: https://api.scorecard.dev/projects/github.com/expressjs/express/badge
+[ossf-scorecard-visualizer]: https://ossf.github.io/scorecard-visualizer/#/projects/github.com/expressjs/express
+[Code of Conduct]: https://github.com/expressjs/express/blob/master/Code-Of-Conduct.md
