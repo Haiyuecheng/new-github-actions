@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: resume-new
+  name: nginx
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: resume-new
+      app: nginx
   template:
     metadata:
       labels:
-        app: resume-new
+        app: nginx
     spec:
       containers:
-      - name: resume-new
-        image: 010928195739.dkr.ecr.ap-southeast-2.amazonaws.com/resume-new/resume-new:IMAGE_TAG_PLACEHOLDER
+      - name: nginx
+        image: 010928195739.dkr.ecr.ap-southeast-2.amazonaws.com/nginx/nginx:IMAGE_TAG_PLACEHOLDER
         ports:
         - containerPort: 80
