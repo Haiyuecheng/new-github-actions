@@ -5,8 +5,8 @@ on:
       - main
 
 env:
-  AWS_APP_NAME: my-resume
-  AWS_ENV_NAME: My-resume-env
+  AWS_APP_NAME: new-ebs
+  AWS_ENV_NAME: New-ebs-env
 
 jobs:
   deploy:
